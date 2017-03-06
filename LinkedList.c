@@ -43,3 +43,36 @@ void add(List *lista){
   //incremento do tamanho da lista
   lista -> size = lista -> size + 1;
 }
+
+void remove(List *lista, int index){
+
+  //verificar se o array encontra s edentros do limites
+  if(lista->size<=index){
+    exit(0);
+  }
+
+  int count = 0;
+  Item *newp = lista -> first;
+
+  //eliminar o primeiro no
+  if(index == 0){
+    lista -> first = newp -> next;
+    free(newp);
+  }
+
+  //eliminar no meio
+  while (newp -> next -> next != NULL) {
+    if(++count==index){
+      Item *aux = newp -> next;
+      newp -> next = aux -> next;
+      free(aux);
+      break;
+    }
+    newp = newp -> next;
+  }
+
+  if(++count==index){
+    newp -> next = NULL;
+  }
+  lista -> size = lista -> size--;
+}

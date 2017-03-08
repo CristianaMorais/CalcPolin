@@ -13,7 +13,7 @@ union Monom{
   } exp;
 }
 
-Monom * newExpre(int c, char v, int e){
+Monom *newExpre(int c, char v, int e){
   Monom *new = (Monom *)malloc(sizeof(struct exp));
   new -> exp.coeficiente = c;
   new -> exp.variavel = v;
@@ -24,7 +24,7 @@ Monom * newExpre(int c, char v, int e){
   return new;
 }
 
-Monom * newConstante(int c){
+Monom *newConstante(int c){
   Monom *new = (Monom *)malloc(sizeof(int));
   new -> constante = c;
 

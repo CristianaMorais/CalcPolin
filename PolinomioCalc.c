@@ -61,7 +61,32 @@ void normalize(List *lista){
   }
 }
 
+void derivate(List *lista){
+  Item *newp = lista -> first;
+  int index = 0;
+  while (newp != NULL) {
+    switch (newp -> value -> flag) {
+      case Expre:
+        if(newp -> value -> expoente == 1){
+          removeItem(lista,index);
+          addOn(lista,newConstante(newp -> value -> coeficiente));          
+        }
+        else{
+          newp -> value -> coeficiente = newp -> value -> coeficiente * newp -> value -> expoente;
+          newp -> value -> expoente = newp -> value -> expoente - 1;
+        }
+        break;
 
+      case Consta:
+        removeItem(lista,index);
+        newp = newp -> next;
+        continue;
+        break;
+    }
+    newp = newp -> next;
+    ++index;
+  }
+}
 
 
 int main(int argc, char const *argv[]) {

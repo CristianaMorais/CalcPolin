@@ -30,6 +30,37 @@ Item *newItem(Monom *value){
   return newp;
 }
 
+void addOn(List *lista, Monom value, index){
+  Item *aux = lista -> first;
+  Item *newp = aux -> next;
+
+  //caso ser o primeiro
+  if(index == 0){
+    lista -> first == newItem(value);
+    lista -> first -> next;
+    lista -> size = lista -> size + 1;
+    return;
+  }
+
+  int index = 0;
+  while (newp != NULL) {
+    if(++i == index){
+      aux -> next = newItem(value);
+      aux -> next -> next = newp;
+    }
+    aux = newp;
+    newp = newp -> next;
+  }
+
+  //tratar se for no fim
+  if((lista -> size) == index){
+    aux -> next = newItem(value);
+    lista -> end = aux -> next;
+  }
+  //atualizar o size
+  lista -> size = lista -> size + 1;
+}
+
 void add(List *lista, Monom value){
   Item *newp = lista -> end;
 

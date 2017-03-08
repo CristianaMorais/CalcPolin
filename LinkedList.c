@@ -9,7 +9,7 @@ struct List{
 
 // Struct ITEM
 struct Item{
-  Monom value;
+  Monom *value;
   Item *next;
 };
 
@@ -22,7 +22,7 @@ List *newList(){
   lista -> end = NULL;
 }
 
-Item *newItem(Monom value){
+Item *newItem(Monom *value){
   Item *newp;
   newp=(Item*)malloc(sizeof(Item));
   newp -> value = value

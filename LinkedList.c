@@ -1,19 +1,5 @@
 #include "LinkedList.h"
 
-//Struct LIST
-struct List{
-  Item *first;
-  Item *end;
-  int size;
-};
-
-// Struct ITEM
-struct Item{
-  Monom *value;
-  Item *next;
-};
-
-
 List *newList(){
   List *lista;
   lista = (List *)malloc(sizeof(List));
@@ -25,12 +11,12 @@ List *newList(){
 Item *newItem(Monom *value){
   Item *newp;
   newp=(Item*)malloc(sizeof(Item));
-  newp -> value = value
+  newp -> value = value;
   newp -> next = NULL;
   return newp;
 }
 
-void addOn(List *lista, Monom value, index){
+void addOn(List *lista, Monom *value, int index){
   Item *aux = lista -> first;
   Item *newp = aux -> next;
 
@@ -42,7 +28,7 @@ void addOn(List *lista, Monom value, index){
     return;
   }
 
-  int index = 0;
+  int i = 0;
   while (newp != NULL) {
     if(++i == index){
       aux -> next = newItem(value);
@@ -61,7 +47,7 @@ void addOn(List *lista, Monom value, index){
   lista -> size = lista -> size + 1;
 }
 
-void add(List *lista, Monom value){
+void add(List *lista, Monom *value){
   Item *newp = lista -> end;
 
   //criacao do novo item

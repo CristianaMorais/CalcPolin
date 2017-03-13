@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "LinkedList.h"
-#include "Monomio.h"
 
 void normalize(List *lista){
-  Item *new1;
+  Item *new1 = lista->first;
   Item *new2;
   int index = 0;
 
@@ -69,7 +68,7 @@ void derivate(List *lista){
       case Expre:
         if(newp -> value -> expoente == 1){
           removeItem(lista,index);
-          addOn(lista,newConstante(newp -> value -> coeficiente));          
+          addOn(lista,newConstante(newp -> value -> coeficiente));
         }
         else{
           newp -> value -> coeficiente = newp -> value -> coeficiente * newp -> value -> expoente;

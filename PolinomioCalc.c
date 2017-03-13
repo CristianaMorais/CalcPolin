@@ -61,12 +61,14 @@ void normalize(List *lista){
   }
 }
 
-void derivate(List *lista){
+void derivate(List *lista,char target){
   Item *newp = lista -> first;
   int index = 0;
   while (newp != NULL) {
     switch (newp -> value -> flag) {
       case Expre:
+        if(newp -> value -> exp -> variavel != target)
+          break;
         if(newp -> value -> exp -> expoente == 1){
           removeItem(lista,index);
           addOn(lista,newConstante(newp -> value-> exp -> coeficiente),index);
@@ -88,6 +90,34 @@ void derivate(List *lista){
   }
 }
 
+void integrate(List *lista,char target){
+  int aux;
+  Item *newp = lista -> first;
+  int index = 0;
+  while (newp != NULL) {
+    switch (newp -> value -> flag) {
+      case Expre:
+        if(newp -> value -> exp -> variavel != target)
+          break;
+        else{
+          newp -> value ->exp-> coeficiente = newp -> value ->exp-> coeficiente / newp -> value ->exp-> expoente;
+          newp -> value ->exp-> expoente = newp -> value ->exp-> expoente + 1;
+        }
+        break;
+
+      case Consta:
+        aux = newp -> value -> constante;
+        newp = newp -> next;
+        removeItem(lista,index);
+        addOn(lista,newExpre(aux,target,1),index);
+        ++index;
+        continue;
+        break;
+    }
+    newp = newp -> next;
+    ++index;
+  }
+}
 
 int main(int argc, char const *argv[]) {
 

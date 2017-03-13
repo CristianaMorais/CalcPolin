@@ -7,21 +7,22 @@ void normalize(List *lista){
   Item *new1 = lista->first;
   Item *new2;
   int index = 0;
+  int contsAux, indexLocal;
 
   while (new1 != NULL) {
     new2 = new1 -> next;
     switch (new1 -> value -> flag) {
       //Caso para se for um monomio
       case Expre:
-        int contsAux = newp1 -> value -> variavel -> coeficiente;
-        int indexLocal = index;
+        contsAux = new1 -> value -> exp ->coeficiente;
+        indexLocal = index;
         while (new2 != NULL) {
-          boolean flag = true;
+          bool flag = true;
           if(new2 -> value -> flag == Expre){ //Verifica se e um monomio
-            if(newp1 -> value -> variavel == newp1 -> value -> variavel){ // se aplica se a mesma variavel
-              if(newp1 -> value -> expoente == newp1 -> value -> expoente){ //se tem o mesmo expoente
+            if(new1 -> value -> exp->variavel == new1 -> value -> exp -> variavel){ // se aplica se a mesma variavel
+              if(new1 -> value ->exp -> expoente == new1 -> value-> exp -> expoente){ //se tem o mesmo expoente
                 flag = false;
-                contsAux = newp1 -> value -> expoente + contsAux;
+                contsAux = new1 -> value ->exp -> coeficiente + contsAux;
                 new2 = new2 -> next;
                 removeItem(lista,indexLocal);
               }
@@ -33,13 +34,13 @@ void normalize(List *lista){
             ++indexLocal;
           }
         }
-        newp1 -> value -> variavel -> coeficiente = contsAux;
+        new1 -> value -> exp -> coeficiente = contsAux;
         break;
 
       //Caso para se for uma constante
       case Consta:
-        int contsAux = new1 -> value -> constante;
-        int indexLocal = index;
+        contsAux = new1 -> value -> constante;
+        indexLocal = index;
         while (new2 != NULL) {
           if (new2 -> value -> flag==Consta) {
             contsAux = new1 -> value -> constante + contsAux;
@@ -66,13 +67,13 @@ void derivate(List *lista){
   while (newp != NULL) {
     switch (newp -> value -> flag) {
       case Expre:
-        if(newp -> value -> expoente == 1){
+        if(newp -> value -> exp -> expoente == 1){
           removeItem(lista,index);
-          addOn(lista,newConstante(newp -> value -> coeficiente));
+          addOn(lista,newConstante(newp -> value-> exp -> coeficiente),index);
         }
         else{
-          newp -> value -> coeficiente = newp -> value -> coeficiente * newp -> value -> expoente;
-          newp -> value -> expoente = newp -> value -> expoente - 1;
+          newp -> value ->exp-> coeficiente = newp -> value ->exp-> coeficiente * newp -> value ->exp-> expoente;
+          newp -> value ->exp-> expoente = newp -> value ->exp-> expoente - 1;
         }
         break;
 

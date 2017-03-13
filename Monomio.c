@@ -1,10 +1,11 @@
 #include "Monomio.h"
 
 Monom *newExpre(int c, char v, int e){
-  Monom *new = (Monom *)malloc(sizeof(struct ex));
-  new -> exp.coeficiente = c;
-  new -> exp.variavel = v;
-  new -> exp.expoente = e;
+  Monom *new = (Monom *)malloc(sizeof(Expressao));
+  new -> exp = (Expressao *)malloc(sizeof(Expressao));
+  new -> exp->coeficiente = c;
+  new -> exp->variavel = v;
+  new -> exp->expoente = e;
 
   new -> flag = Expre;
 

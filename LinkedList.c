@@ -6,6 +6,7 @@ List *newList(){
   lista -> size = 0;
   lista -> first;
   lista -> end = NULL;
+  return lista;
 }
 
 Item *newItem(Monom *value){
@@ -95,17 +96,29 @@ void removeItem(List *lista, int index){
   lista -> size = lista -> size--;
 }
 
-/*
-Debug of list
+
+//Debug of list
 void printList(List *lista){
+  printf("Entrei na printlist");
   Item *newp = lista -> first;
+
   while (newp != NULL) {
-    printf(" %d\n",newp->value );
+    printf("Estou aqui antes switch");
+    switch (newp->value->flag) {
+      case Expre:
+        printf("Mon: %d*%c^%d\n",newp->value->exp->coeficiente,newp->value->exp->variavel,newp->value->exp->expoente );
+        printf("Estou aqui");
+        break;
+      case Consta:
+        printf("Const: %d\n",newp->value->constante );
+        break;
+    }
     newp = newp -> next;
   }
   printf("\n");
 }
 
+/*
 int main(int argc, char const *argv[]) {
   int n;
   List *lista = newList();

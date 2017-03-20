@@ -99,13 +99,11 @@ void removeItem(List *lista, int index){
 
 //Debug of list
 void printList(List *lista){
-  printf("Entrei na printlist");
   Item *newp = lista -> first;
 
   while (newp != NULL) {
-    printf("Estou aqui antes switch");
     switch (newp->value->flag) {
-      case Expre:exp->
+      case Expre: //exp->
         printf("Mon: %d*%c^%d\n",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
         printf("Estou aqui");
         break;

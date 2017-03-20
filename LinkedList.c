@@ -18,16 +18,16 @@ Item *newItem(Monom *value){
 }
 
 void addOn(List *lista, Monom *value, int index){
-  Item *aux = lista -> first;
-  Item *newp = aux -> next;
-
   //caso ser o primeiro
+  Item *aux = lista -> first;
   if(index == 0){
     lista -> first = newItem(value);
-    lista -> first -> next;
+    lista -> first -> next = aux;
     lista -> size = lista -> size + 1;
     return;
   }
+
+  Item *newp = aux -> next;
 
   int i = 0;
   while (newp != NULL) {
@@ -77,6 +77,8 @@ void removeItem(List *lista, int index){
   if(index == 0){
     lista -> first = newp -> next;
     free(newp);
+    lista -> size = lista -> size--;
+    return;
   }
 
   //eliminar no meio
@@ -105,7 +107,7 @@ void printList(List *lista){
     switch (newp->value->flag) {
       case Expre: //exp->
         printf("Mon: %d*%c^%d\n",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
-        printf("Estou aqui");
+        //printf("Estou aqui");
         break;
       case Consta:
         printf("Const: %d\n",newp->value->val->constante );

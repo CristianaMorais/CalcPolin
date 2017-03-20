@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Monom Monom;
 typedef struct Expressao Expressao;

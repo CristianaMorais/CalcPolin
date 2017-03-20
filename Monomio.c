@@ -15,13 +15,9 @@ Monom *newExpre(int c, char v, int e){
 }
 
 Monom *newConstante(int c){
-  Monom *new = (Monom *)malloc(sizeof(int));
+  Monom *new = (Monom *)malloc(sizeof(Monom));
   new -> val = (Valor *)malloc(sizeof(Valor));
-  new -> val -> exp = (Expressao *)malloc(sizeof(Expressao));
-
   new -> val -> constante = c;
-
   new -> flag = Consta;
-
   return new;
 }

@@ -18,32 +18,36 @@ void normalize(List *lista){
       //Caso para se for um monomio
       case Expre:
         contsAux = new1 -> value ->val-> exp ->coeficiente;
-        indexLocal = index;
+        indexLocal = index+1;
         while (new2 != NULL) {
           bool flag = true;
           if(new2 -> value -> flag == Expre){ //Verifica se e um monomio
-            if(new1 -> value -> val->exp->variavel == new1 -> value ->val-> exp -> variavel){ // se aplica se a mesma variavel
-              if(new1 -> value ->val->exp -> expoente == new1 -> value->val-> exp -> expoente){ //se tem o mesmo expoente
+            if(new1 -> value -> val->exp->variavel == new2 -> value ->val-> exp -> variavel){ // se aplica se a mesma variavel
+              if(new1 -> value ->val->exp -> expoente == new2 -> value->val-> exp -> expoente){ //se tem o mesmo expoente
                 flag = false;
-                contsAux = new1 -> value ->val->exp -> coeficiente + contsAux;
+                contsAux = new2 -> value ->val->exp -> coeficiente + contsAux;
                 new2 = new2 -> next;
                 removeItem(lista,indexLocal);
+
               }
             }
           }
           //Se nao entrou no ultimo if a flag estara a  true
           if(flag){
+            flag = true;
             new2 = new2 -> next;
             ++indexLocal;
           }
         }
+        //printf("Estou aqui %d \n",contsAux);
         new1 -> value ->val-> exp -> coeficiente = contsAux;
+        //printf("Estou aqui\n");
         break;
 
       //Caso para se for uma constante
       case Consta:
         contsAux = new1 -> value ->val-> constante;
-        indexLocal = index;
+        indexLocal = index+1;
         while (new2 != NULL) {
           if (new2 -> value -> flag==Consta) {
             contsAux = new1 -> value -> val->constante + contsAux;
@@ -73,8 +77,12 @@ void derivate(List *lista,char target){
         if(newp -> value -> val->exp -> variavel != target)
           break;
         if(newp -> value -> val->exp -> expoente == 1){
+          int aux = newp -> value->val-> exp -> coeficiente;
+          newp = newp -> next;
           removeItem(lista,index);
-          addOn(lista,newConstante(newp -> value->val-> exp -> coeficiente),index);
+          addOn(lista,newConstante(aux),index);
+          ++index;
+          continue;
         }
         else{
           newp -> value ->val->exp-> coeficiente = newp -> value ->val->exp-> coeficiente * newp -> value ->val->exp-> expoente;
@@ -146,8 +154,8 @@ void integrate(List *lista,char target){
         if(newp -> value ->val->exp -> variavel != target)
           break;
         else{
-          newp -> value ->val->exp-> coeficiente = newp -> value ->val->exp-> coeficiente / newp -> value ->val->exp-> expoente;
           newp -> value ->val->exp-> expoente = newp -> value ->val->exp-> expoente + 1;
+          newp -> value ->val->exp-> coeficiente = newp -> value ->val->exp-> coeficiente / newp -> value ->val->exp-> expoente;
         }
         break;
 
@@ -172,24 +180,24 @@ int main(int argc, char const *argv[]) {
   char variavel;
   int expoente;
   int aux;
-  //scanf("%d",&aux);
-//  while (aux != 42) {
-    //printf("Novo Polinomio\n");
+  scanf("%d",&aux);
+  while (aux != 42) {
+    printf("Novo Polinomio\n");
     scanf("%d %c %d",&coeficiente,&variavel,&expoente);
     if(variavel == '-'){
       add(lista,newConstante(coeficiente));
     }
     else{
-      printf("%d %c %d\n",coeficiente, variavel,expoente );
+//      printf("%d %c %d\n",coeficiente, variavel,expoente );
       add(lista,newExpre(coeficiente,variavel,expoente));
-
     }
-  //}
-  printf("%p\n",lista );
-  printf("%d\n",lista->first->value->val ->exp->coeficiente);
-  printf("Antes do printlist\n");
+    scanf("%d",&aux);
+  }
+  normalize(lista);
   printList(lista);
   derivate(lista,'x');
+  printList(lista);
+  integrate(lista,'x');
   printList(lista);
   return 0;
 }

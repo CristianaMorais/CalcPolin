@@ -1,20 +1,25 @@
 #include <stdlib.h>
 
-typedef union Monom Monom;
+typedef struct Monom Monom;
 typedef struct Expressao Expressao;
+typedef union Valor Valor;
+
 struct Expressao{
   int coeficiente;
   char variavel;
   int expoente;
 };
 
-union Monom{
+union Valor{
+  int constante;
+  Expressao* exp;
+};
+
+
+struct Monom{
   enum {Expre, Consta} flag;
 
-  int constante;
-
-  Expressao* exp;
-
+  Valor *val;
 };
 
 Monom *newExpre(int c, char v, int e);

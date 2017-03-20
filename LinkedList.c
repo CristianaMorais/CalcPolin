@@ -4,7 +4,7 @@ List *newList(){
   List *lista;
   lista = (List *)malloc(sizeof(List));
   lista -> size = 0;
-  lista -> first;
+  lista -> first = NULL;
   lista -> end = NULL;
   return lista;
 }
@@ -23,7 +23,7 @@ void addOn(List *lista, Monom *value, int index){
 
   //caso ser o primeiro
   if(index == 0){
-    lista -> first == newItem(value);
+    lista -> first = newItem(value);
     lista -> first -> next;
     lista -> size = lista -> size + 1;
     return;
@@ -49,11 +49,11 @@ void addOn(List *lista, Monom *value, int index){
 }
 
 void add(List *lista, Monom *value){
-  Item *newp = lista -> end;
-
+    Item *newp = lista -> end;
   //criacao do novo item
   if(newp == NULL){
-    lista -> first = lista -> end = newItem(value);
+    lista -> first = newItem(value);
+    lista -> end = lista -> first ;
   }
   else{
     newp -> next = newItem(value);
@@ -105,12 +105,12 @@ void printList(List *lista){
   while (newp != NULL) {
     printf("Estou aqui antes switch");
     switch (newp->value->flag) {
-      case Expre:
-        printf("Mon: %d*%c^%d\n",newp->value->exp->coeficiente,newp->value->exp->variavel,newp->value->exp->expoente );
+      case Expre:exp->
+        printf("Mon: %d*%c^%d\n",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
         printf("Estou aqui");
         break;
       case Consta:
-        printf("Const: %d\n",newp->value->constante );
+        printf("Const: %d\n",newp->value->val->constante );
         break;
     }
     newp = newp -> next;

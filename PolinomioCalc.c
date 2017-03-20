@@ -167,25 +167,27 @@ void integrate(List *lista,char target){
 
 int main(int argc, char const *argv[]) {
   List *lista = newList();
-  printf("Inserir mais um");
+  //printf("Inserir mais um");
   int coeficiente;
   char variavel;
   int expoente;
   int aux;
-  scanf("%d",&aux);
+  //scanf("%d",&aux);
 //  while (aux != 42) {
-    printf("Novo Polinomio\n");
+    //printf("Novo Polinomio\n");
     scanf("%d %c %d",&coeficiente,&variavel,&expoente);
     if(variavel == '-'){
       add(lista,newConstante(coeficiente));
     }
     else{
-      //printf("Aqui\n");
+      printf("%d %c %d\n",coeficiente, variavel,expoente );
       add(lista,newExpre(coeficiente,variavel,expoente));
-      //  printf(" Saiu Aqui\n");
+
     }
   //}
-  printf("Sai dos parentesis\n");
+  printf("%p\n",lista );
+  printf("%d\n",lista->first->value->exp->coeficiente);
+  printf("Antes do printlist\n");
   printList(lista);
   derivate(lista,'x');
   printList(lista);

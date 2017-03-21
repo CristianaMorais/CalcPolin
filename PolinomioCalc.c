@@ -124,10 +124,11 @@ void soma(List *lista1, List *lista2){
             if(newp1 -> value ->val->exp -> expoente == newp2 -> value ->val->exp -> expoente){
               newp1 -> value ->val->exp -> coeficiente = newp1 -> value ->val->exp -> coeficiente + newp2 -> value ->val->exp -> coeficiente;
               removeItem(lista2,index);
+              flag = true;
             }
           }
-          flag = true;
         }
+        break;
 
         case Consta:
         if(newp1 -> value -> flag==Expre){
@@ -135,18 +136,25 @@ void soma(List *lista1, List *lista2){
           newp1 -> value -> val -> constante = newp1 -> value -> val -> constante + newp2 -> value -> val -> constante;
           removeItem(lista2,index);
         }
+        break;
+
       }
       if (flag){
         break;
       }
       else
       ++index;
+
+      newp2 = newp2 -> next;
     }
-    newp1 = lista1 -> end;
-    newp1 -> next = lista2 -> first;
+    //printf("Saiu\n");
+    newp1 = newp1 -> next;
     //teste
-    free(lista2);
+    //free(lista2);
   }
+  newp1 = lista1 -> end;
+  newp1 -> next = lista2 -> first;
+  free(lista2);
 }
 
 void integrate(List *lista,char target){

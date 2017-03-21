@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include "LinkedList.h"
 #include <ctype.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+
+#define MAXARGS 100
 
 void normalize(List *lista){
   Item *new1 = lista->first;
@@ -101,7 +106,7 @@ void derivate(List *lista,char target){
   }
 }
 
-List *soma(List *lista1, List *lista2){
+void soma(List *lista1, List *lista2){
   normalize(lista1);
   normalize(lista2);
 
@@ -173,8 +178,161 @@ void integrate(List *lista,char target){
   }
 }
 
+Monom *parseMonom(char *token){
+  char *aux1, *aux2, *aux3;
+
+  //delimitadores
+  const char delimiterEstrela[2] = "*";
+  const char delimiterLevantado[2] = "^";
+  aux1 = strtok(token,delimiterEstrela);
+  aux2 = strtok(NULL,delimiterLevantado);
+  //printf("%s %s\n",aux1,aux2 );
+  if(aux2 == NULL){
+    return newConstante(atoi(aux1));
+  }
+  else{
+    aux3 = strtok(NULL,delimiterEstrela); //para meter nojo
+    //printf("%s\n",aux3);
+    return newExpre(atoi(aux1),aux2[0],atoi(aux3));
+  }
+}
+
+void printHelp(){
+
+}
+
+int parse(char *linha){
+  const char delimiter[2] = " ";
+  const char delimiter2[2] = "+";
+  char *token;
+  char *resto;
+  List *lista1;
+  List *lista2;
+  token = strtok(linha, delimiter);
+  if(!strcmp(token,"exit")) return 0;
+  if(!strcmp(token,"help")){ printHelp(); return 1;}
+
+  //derivar
+  if(!strcmp(token,"deriva")){
+    token = strtok(NULL,delimiter);
+    char target = token[0];
+    lista1 = newList();
+    token = strtok(NULL,delimiter2);
+    resto = strtok(NULL,delimiter);
+    while(token != NULL){
+      //printf("%s %s\n",token,resto );
+      add(lista1, parseMonom(token));
+      token = strtok(resto,delimiter2);
+      resto = strtok(NULL,delimiter);
+    }
+    //printList(lista1);
+    derivate(lista1,target);
+    putchar('\n');
+    printList(lista1);
+    putchar('\n');
+    free(lista1);
+    return 1;
+  }
+
+  //integra
+  if(!strcmp(token,"integra")){
+    token = strtok(NULL,delimiter);
+    char target = token[0];
+    lista1 = newList();
+    token = strtok(NULL,delimiter2);
+    resto = strtok(NULL,delimiter);
+    while(token != NULL){
+      //printf("%s %s\n",token,resto );
+      add(lista1, parseMonom(token));
+      token = strtok(resto,delimiter2);
+      resto = strtok(NULL,delimiter);
+    }
+    //printList(lista1);
+    integrate(lista1,target);
+    putchar('\n');
+    printList(lista1);
+    putchar('\n');
+    free(lista1);
+    return 1;
+  }
+
+  //normaliza
+  if(!strcmp(token,"normaliza")){
+    lista1 = newList();
+    token = strtok(NULL,delimiter2);
+    resto = strtok(NULL,delimiter);
+    while(token != NULL){
+      //printf("%s %s\n",token,resto );
+      add(lista1, parseMonom(token));
+      token = strtok(resto,delimiter2);
+      resto = strtok(NULL,delimiter);
+    }
+    //printList(lista1);
+    normalize(lista1);
+    putchar('\n');
+    printList(lista1);
+    putchar('\n');
+    free(lista1);
+    return 1;
+  }
+
+  //soma
+  if(!strcmp(token,"soma")){
+    lista1 = newList();
+    lista2 = newList();
+    token = strtok(NULL,delimiter);
+    char *restBigger = strtok(NULL,delimiter);
+
+    //lista 1
+    token = strtok(token,delimiter2);
+    resto = strtok(NULL,delimiter);
+    while(token != NULL){
+      //printf("%s %s\n",token,resto );
+      add(lista1, parseMonom(token));
+      token = strtok(resto,delimiter2);
+      resto = strtok(NULL,delimiter);
+    }
+
+    //lista 2
+    token = strtok(restBigger,delimiter2);
+    resto = strtok(NULL,delimiter);
+    while(token != NULL){
+      //printf("%s %s\n",token,resto );
+      add(lista2, parseMonom(token));
+      token = strtok(resto,delimiter2);
+      resto = strtok(NULL,delimiter);
+    }
+    soma(lista1, lista2);
+    putchar('\n');
+    printList(lista1);
+    putchar('\n');
+    return 1;
+  }
+
+  printf("Opção nao reconhecida!\n");
+  printHelp();
+  return -1;
+}
+
 int main(int argc, char const *argv[]) {
-  List *lista = newList();
+  while (1) {
+      char *linha;
+      if ((linha = readline(" >")) == NULL){
+        putchar('\n');
+        exit(0);
+      }
+      if (strlen(linha) != 0) {
+        add_history(linha);
+        int status = parse(linha);
+        if(!status){
+          putchar('\n');
+          exit(0);
+        }
+      }
+      free(linha);
+    }
+
+  /*List *lista = newList();
   //printf("Inserir mais um");
   int coeficiente;
   char variavel;
@@ -198,6 +356,6 @@ int main(int argc, char const *argv[]) {
   derivate(lista,'x');
   printList(lista);
   integrate(lista,'x');
-  printList(lista);
+  printList(lista); */
   return 0;
 }

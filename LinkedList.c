@@ -102,20 +102,33 @@ void removeItem(List *lista, int index){
 //Debug of list
 void printList(List *lista){
   Item *newp = lista -> first;
+  if(newp == NULL)
+    return;
+
+  //CASO INICIAL
+  switch (newp->value->flag) {
+      case Expre:
+        printf("%d*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        break;
+      case Consta:
+        printf("%d ",newp->value->val->constante );
+        break;
+    }
+    newp = newp -> next;
 
   while (newp != NULL) {
     switch (newp->value->flag) {
       case Expre: //exp->
-        printf("Mon: %d*%c^%d\n",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        printf("+ %d*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
         //printf("Estou aqui");
         break;
       case Consta:
-        printf("Const: %d\n",newp->value->val->constante );
+        printf("+ %d ",newp->value->val->constante );
         break;
     }
     newp = newp -> next;
   }
-  printf("\n");
+  putchar('\n');
 }
 
 /*

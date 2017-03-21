@@ -331,31 +331,5 @@ int main(int argc, char const *argv[]) {
       }
       free(linha);
     }
-
-  /*List *lista = newList();
-  //printf("Inserir mais um");
-  int coeficiente;
-  char variavel;
-  int expoente;
-  int aux;
-  scanf("%d",&aux);
-  while (aux != 42) {
-    printf("Novo Polinomio\n");
-    scanf("%d %c %d",&coeficiente,&variavel,&expoente);
-    if(variavel == '-'){
-      add(lista,newConstante(coeficiente));
-    }
-    else{
-//      printf("%d %c %d\n",coeficiente, variavel,expoente );
-      add(lista,newExpre(coeficiente,variavel,expoente));
-    }
-    scanf("%d",&aux);
-  }
-  normalize(lista);
-  printList(lista);
-  derivate(lista,'x');
-  printList(lista);
-  integrate(lista,'x');
-  printList(lista); */
   return 0;
 }

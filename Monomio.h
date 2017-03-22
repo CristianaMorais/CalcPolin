@@ -6,7 +6,7 @@ typedef struct Expressao Expressao;
 typedef union Valor Valor;
 
 struct Expressao{
-  int coeficiente;
+  float coeficiente;
   char variavel;
   int expoente;
 };
@@ -19,7 +19,7 @@ union Valor{
 
 struct Monom{
   enum {Expre, Consta} flag;
-
+  char aux;
   Valor *val;
 };
 

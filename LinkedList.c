@@ -108,7 +108,10 @@ void printList(List *lista){
   //CASO INICIAL
   switch (newp->value->flag) {
       case Expre:
-        printf("%d*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        if(newp->value->aux == -1)
+          printf("%.2f*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        else
+          printf("%.2f*%c*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->aux,newp->value->val->exp->expoente );
         break;
       case Consta:
         printf("%d ",newp->value->val->constante );
@@ -119,7 +122,10 @@ void printList(List *lista){
   while (newp != NULL) {
     switch (newp->value->flag) {
       case Expre: //exp->
-        printf("+ %d*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        if(newp->value->aux == -1)
+          printf("+ %.2f*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->val->exp->expoente );
+        else
+          printf("+ %.2f*%c*%c^%d ",newp->value->val->exp->coeficiente,newp->value->val->exp->variavel,newp->value->aux,newp->value->val->exp->expoente );
         //printf("Estou aqui");
         break;
       case Consta:

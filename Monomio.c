@@ -10,7 +10,7 @@ Monom *newExpre(int c, char v, int e){
   new -> val -> exp->expoente = e;
 
   new -> flag = Expre;
-
+  new -> aux = -1;
   return new;
 }
 
@@ -19,5 +19,6 @@ Monom *newConstante(int c){
   new -> val = (Valor *)malloc(sizeof(Valor));
   new -> val -> constante = c;
   new -> flag = Consta;
+  new -> aux = -1;
   return new;
 }

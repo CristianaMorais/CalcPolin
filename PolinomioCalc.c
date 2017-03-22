@@ -164,8 +164,10 @@ void integrate(List *lista,char target){
   while (newp != NULL) {
     switch (newp -> value -> flag) {
       case Expre:
-        if(newp -> value ->val->exp -> variavel != target)
+        if(newp -> value ->val->exp -> variavel != target){
+          newp -> value -> aux = target;
           break;
+        }
         else{
           newp -> value ->val->exp-> expoente = newp -> value ->val->exp-> expoente + 1;
           newp -> value ->val->exp-> coeficiente = newp -> value ->val->exp-> coeficiente / newp -> value ->val->exp-> expoente;

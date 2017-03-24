@@ -17,3 +17,4 @@ $(TARGET): $(TARGET).c
 
 clean:
 	$(RM) $(TARGET)
+	$(RM) LinkedList.h.gch Monomio.h.gch

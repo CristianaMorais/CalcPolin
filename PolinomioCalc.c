@@ -205,14 +205,14 @@ Monom *parseMonom(char *token){
 void printHelp(){
 	printf("\n");
 	printf(" -------------------------------Menu Principal------------------------------\n\n");
-  printf("Síntaxe:\n  - Num Polinomio, entre cada polinómio utiliza-se o sinal '+'.\n");
+  printf("Síntaxe:\n  - Num Polinomio, entre cada monómio utiliza-se o sinal '+'.\n");
   printf("  - O monómio escreve-se da sequinte forma:\n   [coeficiente]*[parte literal sem grau]^[grau da parte literal].\n");
   printf("  - Nenhuma das partes do monómio são opcional, têm de ser todas escritas de forma explicita,\n    à expção de quando é uma constante, nesse caso basta escrevê-la diretamente.\n\n");
 
 	printf(" --Comando----|--------------Input-----------------------Defeniçao----------\n");
 	printf(" normaliza   ->   --------    ->  Polinomio    ->  Normalizar Polinomio\n");
-	printf(" deriva      ->   variavel    ->  Polinomio    ->  Derivar Polinomio\n");
-	printf(" integra     ->   variavel    ->  Polinomio    ->  Integrar Polinomio\n");
+	printf(" deriva      ->   variavel    ->  Polinomio    ->  Derivar Polinomio em ordem a uma varivável\n");
+	printf(" integra     ->   variavel    ->  Polinomio    ->  Integrar Polinomio em ordem a uma varivável\n");
 	printf(" soma        ->   Polinomio_1 ->  Polinomio_2  ->  Soma de dois Polinomios\n");
   printf(" help        ->   --------    ->  --------     ->  Mostrar este menu\n");
   printf(" exit        ->   --------    ->  --------     ->  Sair do programa\n");
@@ -340,7 +340,7 @@ int main(int argc, char const *argv[]) {
   while (1) {
       char *linha;
 
-      if ((linha = readline(" >")) == NULL){
+      if ((linha = readline(" > ")) == NULL){
         putchar('\n');
         exit(0);
       }

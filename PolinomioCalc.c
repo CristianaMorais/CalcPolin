@@ -204,17 +204,21 @@ Monom *parseMonom(char *token){
 
 void printHelp(){
 	printf("\n");
-	printf(" -------------------------------Memu Principal------------------------------\n\n");
-
+	printf(" -------------------------------Menu Principal------------------------------\n\n");
+  printf("Síntaxe:\n  - Num Polinomio, entre cada polinómio utiliza-se o sinal '+'.\n");
+  printf("  - O monómio escreve-se da sequinte forma:\n   [coeficiente]*[parte literal sem grau]^[grau da parte literal].\n");
+  printf("  - Nenhuma das partes do monómio são opcional, têm de ser todas escritas de forma explicita,\n    à expção de quando é uma constante, nesse caso basta escrevê-la diretamente.\n\n");
 
 	printf(" --Comando----|--------------Input-----------------------Defeniçao----------\n");
-	printf(" normaliza   ->   --------    ->  Polinomio    ->  Normalizar Polinomio?\n");
-	printf(" deriva      ->   variavel    ->  Polinomio    ->  Derivar Polinomio?\n");
-	printf(" integra     ->   variavel    ->  Polinomio    ->  Integrar Polinomio?\n");
-	printf(" soma        ->   Polinomio_1 ->  Polinomio_2  ->  Soma de dois Polinomios?\n");
+	printf(" normaliza   ->   --------    ->  Polinomio    ->  Normalizar Polinomio\n");
+	printf(" deriva      ->   variavel    ->  Polinomio    ->  Derivar Polinomio\n");
+	printf(" integra     ->   variavel    ->  Polinomio    ->  Integrar Polinomio\n");
+	printf(" soma        ->   Polinomio_1 ->  Polinomio_2  ->  Soma de dois Polinomios\n");
+  printf(" help        ->   --------    ->  --------     ->  Mostrar este menu\n");
+  printf(" exit        ->   --------    ->  --------     ->  Sair do programa\n");
 	printf("\n");
-	printf("Exemplo: normaliza 2x^2 + 4 + 3x^2 + 1\n");
-	printf("O resultado seria: 5x^2 + 5 \n\n");
+	printf("Exemplo: normaliza 2*x^2 + 4 + 3*x^2 + 1\n");
+	printf("O resultado seria: 5*x^2 + 5 \n\n");
 	printf("-----------------------------------------------------------------------------\n\n");
 }
 
@@ -326,24 +330,25 @@ int parse(char *linha){
     return 1;
   }
 
-  printf("Opção nao reconhecida!\n");
+  printf("Erro: Opção não reconhecida!\n");
   printHelp();
   return -1;
 }
 
 int main(int argc, char const *argv[]) {
+  printHelp();
   while (1) {
       char *linha;
-      
+
       if ((linha = readline(" >")) == NULL){
         putchar('\n');
         exit(0);
       }
-      
+
       if (strlen(linha) != 0) {
         add_history(linha);
         int status = parse(linha);
-        
+
         if(!status){
           putchar('\n');
           exit(0);

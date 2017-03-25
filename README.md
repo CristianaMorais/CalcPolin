@@ -8,7 +8,7 @@ Programa que calcula a derivada, integral e normalizaçao de um polinomio dado o
 
 #### Trabalho realizado por:
 
-#####[André Cirne](https://sigarra.up.pt/fcup/pt/fest_geral.cursos_list?pv_num_unico=201505860)
+[André Cirne](https://sigarra.up.pt/fcup/pt/fest_geral.cursos_list?pv_num_unico=201505860)
 
-#####[José Pedro](https://sigarra.up.pt/fcup/pt/fest_geral.cursos_list?pv_num_unico=201503443)
+[José Pedro](https://sigarra.up.pt/fcup/pt/fest_geral.cursos_list?pv_num_unico=201503443)
 

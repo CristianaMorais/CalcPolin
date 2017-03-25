@@ -1,5 +1,5 @@
 # CalcPolin
-## Laboratório de Programação - 2017*
+## *Laboratório de Programação - 2017*
 Programa que calcula a derivada, integral e normalizaçao de um polinomio dado ou a soma de dois polinomios dados pelo utilizador.
 
 #### Como utilizar o programa:

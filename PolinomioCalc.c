@@ -4,7 +4,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
 #define MAXARGS 100
 
 void normalize(List *lista){
@@ -204,7 +203,19 @@ Monom *parseMonom(char *token){
 }
 
 void printHelp(){
+	printf("\n");
+	printf(" -------------------------------Memu Principal------------------------------\n\n");
 
+
+	printf(" --Comando----|--------------Input-----------------------Defeniçao----------\n");
+	printf(" normaliza   ->   --------    ->  Polinomio    ->  Normalizar Polinomio?\n");
+	printf(" deriva      ->   variavel    ->  Polinomio    ->  Derivar Polinomio?\n");
+	printf(" integra     ->   variavel    ->  Polinomio    ->  Integrar Polinomio?\n");
+	printf(" soma        ->   Polinomio_1 ->  Polinomio_2  ->  Soma de dois Polinomios?\n");
+	printf("\n");
+	printf("Exemplo: normaliza 2x^2 + 4 + 3x^2 + 1\n");
+	printf("O resultado seria: 5x^2 + 5 \n\n");
+	printf("-----------------------------------------------------------------------------\n\n");
 }
 
 int parse(char *linha){
@@ -323,17 +334,21 @@ int parse(char *linha){
 int main(int argc, char const *argv[]) {
   while (1) {
       char *linha;
+      
       if ((linha = readline(" >")) == NULL){
         putchar('\n');
         exit(0);
       }
+      
       if (strlen(linha) != 0) {
         add_history(linha);
         int status = parse(linha);
+        
         if(!status){
           putchar('\n');
           exit(0);
         }
+
       }
       free(linha);
     }
